@@ -38,7 +38,7 @@ void loop()
     Serial.print("\n");
     //Serial.println(" Celsius");
     //delay(10000); //Delay 2 sec.
-    delay(1000);
+    delay(20000);
 }
 
    
