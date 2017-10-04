@@ -1,7 +1,7 @@
 #include <Stepper.h>
 
 const int stepsPerRevolution =4000;  
-int steps = 4000/2.5*4/6;
+int steps = 4000/2.5*4*2;
 int motor1 = 0;
 int motor2 = 0;
 int buff = 0;
