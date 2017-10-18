@@ -40,6 +40,7 @@ void loop() {
         digitalWrite(4, HIGH);
         digitalWrite(5, LOW);
         digitalWrite(7, LOW);
+        delay(200);
       
         myStepper.step(steps);
         Serial.println("LeftOne");
@@ -47,6 +48,7 @@ void loop() {
         digitalWrite(4, HIGH);
         digitalWrite(5, LOW);
         digitalWrite(7, LOW);
+        delay(200);
       
         myStepper.step(steps * 2);
         Serial.println("LeftTwo");
@@ -54,6 +56,7 @@ void loop() {
         digitalWrite(4, HIGH);
         digitalWrite(5, LOW);
         digitalWrite(7, LOW);
+        delay(200);
       
         myStepper.step(steps * 3);
         Serial.println("LeftThree");
@@ -61,6 +64,7 @@ void loop() {
         digitalWrite(4, HIGH);
         digitalWrite(5, LOW);
         digitalWrite(7, LOW);
+        delay(200);
       
         myStepper.step(steps * 4);
         Serial.println("LeftFour");
@@ -68,6 +72,7 @@ void loop() {
         digitalWrite(7, HIGH);
         digitalWrite(8, HIGH);
         digitalWrite(4, LOW);
+        delay(200);
       
         myStepper.step(steps);
         Serial.println("RightOne");
@@ -75,6 +80,7 @@ void loop() {
         digitalWrite(7, HIGH);
         digitalWrite(8, HIGH);
         digitalWrite(4, LOW);
+        delay(200);
       
         myStepper.step(steps * 2);
         Serial.println("RightTwo");
@@ -82,6 +88,7 @@ void loop() {
         digitalWrite(7, HIGH);
         digitalWrite(8, HIGH);
         digitalWrite(4, LOW);
+        delay(200);
       
         myStepper.step(steps * 3);
         Serial.println("RightThree");
@@ -89,6 +96,7 @@ void loop() {
         digitalWrite(7, HIGH);
         digitalWrite(8, HIGH);
         digitalWrite(4, LOW);
+        delay(200);
       
         myStepper.step(steps * 4);
         Serial.println("RightFour");
