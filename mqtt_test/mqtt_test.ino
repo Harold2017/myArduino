@@ -30,10 +30,16 @@ void loop() {
      
     }
     if (serialData == buff){
+        digitalWrite(4, LOW);
+        digitalWrite(7, LOW);
+        delay(200);
         myStepper.step(0);
         //Serial.println("IsZero");
     }
     else if(serialData==0){
+        digitalWrite(4, LOW);
+        digitalWrite(7, LOW);
+        delay(200);
         myStepper.step(0);
         //Serial.println("IsZero");
     }else if(serialData==1){
@@ -101,6 +107,7 @@ void loop() {
         myStepper.step(steps * 4);
         Serial.println("RightFour");
     }else{
+      delay(200);
         //Serial.println("Else");   
     }
     buff = serialData;
