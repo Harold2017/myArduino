@@ -19,6 +19,7 @@ float CO2 = 0;
 float temperature = 0;
 float humidity = 0;
 float light = 0;
+int m[16];
 
 
 WiFiClientSecure wifiClient;
@@ -66,16 +67,6 @@ void connect() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   Serial.println();
-
-  /* Create JSON payload to sent to Losant
-   *
-   *   {
-   *     "deviceId": "575ecf887ae143cd83dc4aa2",
-   *     "key": "this_would_be_the_key",
-   *     "secret": "this_would_be_the_secret"
-   *   }
-   *
-   */
 }
 
 void setup() {
@@ -152,11 +143,27 @@ void readData(){
   } */
   }
 
+int charToHex(char n){
+  int x = n - '0';
+  if (x < 10){
+  return x;}
+  else {
+    return (x - 7);}
+  }
+
 void calculate(String n) {
-        CO2 = n[3]*256 + n[4];
-        temperature = n[5]*256 + n[6]/100;
-        humidity = (n[7]*256 + n[8])/100;
-        light = (n[9]*256 + n[10])*4;
+  for (int i = 0; i <= 15; i++) {
+    //m[i-9] = charToHex(n[i]);
+    m[i] = n[i];
+    }
+        /*CO2 = (m[0]*16 + m[1])*256 + m[2]*16 + m[3];
+        temperature = ((m[4]*16 + m[5])*256 + m[6]*16 + m[7])/100;
+        humidity = ((m[8]*16 + m[9])*256 + m[10]*16 + m[11])/100;
+        light = ((m[12]*16 + m[13])*256 + m[14]*16 + m[15])*4;*/
+        CO2 = n.length();
+        temperature = m[1];
+        humidity = m[3];
+        light = m[4];
   }
 
 int timeSinceLastRead = 0;
@@ -189,9 +196,9 @@ void loop() {
     }
 
     report(CO2, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/36");
-    report(temperature, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/34");
-    report(humidity, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/35");
-    report(light, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/39");
+    //report(temperature, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/34");
+    //(humidity, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/35");
+    //report(light, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/39");
 
     timeSinceLastRead = 0;
   }
