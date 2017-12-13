@@ -7,8 +7,9 @@
 
 
 // Rx, Tx GPIO
-SoftwareSerial mySerial(3, 1);// Rx, Tx
+//SoftwareSerial mySerial(13, 15);// Rx, Tx
 byte Readmv[8]={02,03,00,00,00,04,68,58};//measured value 对应的为02 03 00 00 00 04 44 3A
+//char Readmv[8]={0x02,0x03,0x00,0x00,0x00,0x04,0x44,0x3A};//measured value 对应的为02 03 00 00 00 04 44 3A
 String comdata = "";
 
 // WiFi credentials.
@@ -27,10 +28,10 @@ WiFiClientSecure wifiClient;
 void connect() {
 
   // Connect to Wifi.
-  Serial.println();
+  /*Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
-  Serial.println(WIFI_SSID);
+  Serial.println(WIFI_SSID);*/
 
   // WiFi fix: https://github.com/esp8266/Arduino/issues/2186
   WiFi.persistent(false);
@@ -42,7 +43,7 @@ void connect() {
 
   while (WiFi.status() != WL_CONNECTED) {
     // Check to see if
-    if (WiFi.status() == WL_CONNECT_FAILED) {
+    /*if (WiFi.status() == WL_CONNECT_FAILED) {
       Serial.println("Failed to connect to WIFI. Please verify credentials: ");
       Serial.println();
       Serial.print("SSID: ");
@@ -50,37 +51,37 @@ void connect() {
       Serial.print("Password: ");
       Serial.println(WIFI_PASS);
       Serial.println();
-    }
+    }*/
 
     delay(500);
-    Serial.println("...");
+    //Serial.println("...");
     // Only try for 5 seconds.
     if(millis() - wifiConnectStart > 5000) {
-      Serial.println("Failed to connect to WiFi");
-      Serial.println("Please attempt to send updated configuration parameters.");
+      //Serial.println("Failed to connect to WiFi");
+      //Serial.println("Please attempt to send updated configuration parameters.");
       return;
     }
   }
 
-  Serial.println();
+  /*Serial.println();
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  Serial.println();
+  Serial.println();*/
 }
 
 void setup() {
   Serial.begin(9600);
   Serial.setTimeout(2000);
-  mySerial.begin(9600);
+  //mySerial.begin(9600);
 
   // Wait for serial to initialize.
   while(!Serial) { }
 
-  Serial.println("Device Started");
+  /*Serial.println("Device Started");
   Serial.println("-------------------------------------");
   Serial.println("Running DHT!");
-  Serial.println("-------------------------------------");
+  Serial.println("-------------------------------------");*/
   connect();
 }
 
@@ -97,11 +98,11 @@ void report(float value, String api_address) {
 
   String buffer;
   root.printTo(buffer);
-  Serial.println("Reported!");
-  Serial.println(buffer);
+  //Serial.println("Reported!");
+  //Serial.println(buffer);
   int httpCode = http.POST(buffer);
 
-  if(httpCode > 0) {
+  /*if(httpCode > 0) {
       if(httpCode == 201) {
           Serial.println("Uploaded.");
       } else {
@@ -117,18 +118,21 @@ void report(float value, String api_address) {
     } else {
         Serial.println("Failed to connect.");
 
-   }
+   }*/
 
   http.end();
 }
 
 
 void readData(){
-  mySerial.write(&Readmv[0],8);
-  while(mySerial.available() > 0){
-    comdata+=char(mySerial.read());
-    //delay(2);
-  }  
+  //Serial.write(&Readmv[0],8);
+  Serial.write(&Readmv[0],8);
+  delay(2);
+  while(Serial.available() > 0){
+    comdata+=char(Serial.read());
+    delay(2);
+  }
+  //Serial.print(comdata);  
 /*if(comdata.length() > 0)             
   {
 //    Serial.println(comdata); 
@@ -171,7 +175,7 @@ void loop() {
    bool toReconnect = false;
 
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("Disconnected from WiFi");
+    //Serial.println("Disconnected from WiFi");
     toReconnect = true;
   }
 
@@ -190,7 +194,7 @@ void loop() {
 
     // Check if any reads failed and exit early (to try again).
     if (isnan(CO2)) {
-      Serial.println("Failed to read from sensors!");
+      //Serial.println("Failed to read from sensors!");
       timeSinceLastRead = 0;
       return;
     }
