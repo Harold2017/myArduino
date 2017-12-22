@@ -1,7 +1,5 @@
 String incomingByte;   // for incoming serial data
 unsigned int output;
-byte Readmv[8]={0x02,0x03,0x00,0x00,0x00,0x04,0x44,0x3A};//measured value 对应的为02 03 00 00 00 04 44 3A
-String comdata = "";
 
 void setup() {
         Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
@@ -25,7 +23,6 @@ int charToHex(char n){
   }
 
 void loop() {
-  Serial.print(Readmv)
 
         // send data only when you receive data:
         while (Serial.available() > 0) {
