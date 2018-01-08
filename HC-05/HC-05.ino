@@ -73,7 +73,7 @@ void setup() {
   Serial.begin(9600); 
   Serial.println("BT is ready!");
   // HC-05默认，38400
-  BT.begin(38400);
+  BT.begin(9600);
 }
 
 void loop() {
@@ -111,6 +111,11 @@ void dht11_read(){
   Serial.print(DHT11.humidity, 1);
   Serial.print(",\t");
   Serial.println(DHT11.temperature, 1);
+  BT.print(DHT11.humidity, 1);
+  BT.print(" ");
+  BT.print(DHT11.temperature, 1);
+  BT.print(" ");
 
   delay(500);
+  BT.print("$");
   }

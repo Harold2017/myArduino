@@ -18,8 +18,8 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 // WiFi credentials.
-const char* WIFI_SSID = "SSID";
-const char* WIFI_PASS = "PASSWORD";
+const char* WIFI_SSID = "nami-staffs";
+const char* WIFI_PASS = "nami09access";
 
 
 WiFiClientSecure wifiClient;
@@ -93,9 +93,9 @@ void setup() {
   connect();
 }
 
-void report(float humidity) {
+void report(float humidity, String api_address) {
   HTTPClient http;
-  http.begin("api_address");
+  http.begin(api_address);
   http.addHeader("Content-Type", "application/json");
   http.addHeader("Accept", "application/json");
   
@@ -167,7 +167,8 @@ void loop() {
     Serial.print(" *C ");
     //h = int(h*10000);
     //h = h/10000;
-    report(h);
+    report(h, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/34");
+    report(t, "http://namiiot.ap.ngrok.io/api/v2.0/d191f1037551707c08622d778bb1438a/35");
 
     timeSinceLastRead = 0;
   }
